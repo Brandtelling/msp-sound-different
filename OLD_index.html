@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,15 +159,6 @@
         .score-circle { width: 80px; height: 80px; }
         .score-number { font-size: 28px; }
       }
-    
-      /* ── Passcode Gate ── */
-      .gate { max-width: 460px; animation: fadeUp 0.4s ease; }
-      .gate-lead { font-size: 15px; line-height: 1.65; color: #5C6070; margin-bottom: 20px; }
-      .gate-row { display: flex; gap: 10px; }
-      .gate-input { flex: 1; background: #fff; border: 1.5px solid #E8E4DC; color: #1B2A4A; font-family: Georgia, serif; font-size: 15px; padding: 12px 14px; outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none; }
-      .gate-input:focus { border-color: #B8922A; }
-      .gate-btn { flex-shrink: 0; background: #1B2A4A; color: #F7F5F0; font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; border: none; padding: 12px 22px; cursor: pointer; transition: background 0.2s; }
-      .gate-btn:hover { background: #B8922A; }
     `;
 
     function MSPVoiceScore() {
@@ -182,9 +172,6 @@
       const [email,          setEmail]          = useState("");
       const [emailSubmitted, setEmailSubmitted] = useState(false);
       const [emailSkipped,   setEmailSkipped]   = useState(false);
-      const [unlocked,       setUnlocked]       = useState(false);
-      const [passcode,       setPasscode]       = useState("");
-      const [passcodeError,  setPasscodeError]  = useState(false);
       const resultsRef = useRef(null);
 
       const words     = wordCount(aboutText);
@@ -333,52 +320,6 @@ ABOUT STATEMENT TO ANALYZE:
       }
 
       const band = results ? getBand(results.score) : null;
-
-      function handlePasscode() {
-        if (passcode.trim().toLowerCase() === "msp compare") {
-          setUnlocked(true);
-          setPasscodeError(false);
-        } else {
-          setPasscodeError(true);
-          setPasscode("");
-        }
-      }
-
-      if (!unlocked) {
-        return (
-          <div className="wrapper">
-            <style>{css}</style>
-
-            <div className="brand-bar">
-              <div className="brand-mark"><span>B</span></div>
-              <div className="brand-name">Brandtelling®</div>
-            </div>
-
-            <div className="hero-label">Free Assessment</div>
-            <h1>Does Your MSP Sound Like Every Other MSP?</h1>
-            <div className="divider" />
-
-            <div className="gate">
-              <p className="gate-lead">This assessment is locked. Enter your passcode to begin.</p>
-              <div className="gate-row">
-                <input
-                  type="password"
-                  className="gate-input"
-                  placeholder="Passcode"
-                  value={passcode}
-                  onChange={e => { setPasscode(e.target.value); setPasscodeError(false); }}
-                  onKeyDown={e => e.key === "Enter" && handlePasscode()}
-                  autoFocus
-                />
-                <button className="gate-btn" onClick={handlePasscode}>Enter →</button>
-              </div>
-              {passcodeError && <p className="error-msg">That passcode doesn't match. Please try again.</p>}
-            </div>
-
-            <div className="version-tag">MSP Voice Score v4 · Brandtelling®</div>
-          </div>
-        );
-      }
 
       return (
         <div className="wrapper">
