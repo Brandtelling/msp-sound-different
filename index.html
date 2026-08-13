@@ -188,7 +188,7 @@
       const resultsRef = useRef(null);
 
       const words     = wordCount(aboutText);
-      const overLimit = words > 300;
+      const overLimit = words > 500;
 
       function validateUrl(val) {
         if (!val.trim()) return "Website URL is required.";
@@ -409,14 +409,14 @@ ABOUT STATEMENT TO ANALYZE:
 
           <div className="field-group">
             <label className="field-label">Your About Statement</label>
-            <div className="field-hint">Paste the "About Us" or company overview from your website. 300 words maximum.</div>
+            <div className="field-hint">Paste the "About Us" or company overview from your website. 500 words maximum.</div>
             <textarea
               placeholder="We are a managed IT services provider serving small and medium businesses in..."
               value={aboutText}
               onChange={e => setAboutText(e.target.value)}
             />
-            <div className={`word-counter ${overLimit ? "over" : words > 270 ? "near" : ""}`}>
-              {words} / 300 words{overLimit ? " — please trim your text" : ""}
+            <div className={`word-counter ${overLimit ? "over" : words > 470 ? "near" : ""}`}>
+              {words} / 500 words{overLimit ? " — please trim your text" : ""}
             </div>
           </div>
 
